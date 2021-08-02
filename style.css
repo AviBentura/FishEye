@@ -7,19 +7,27 @@
   margin: 0;
   padding: 0;
 }
+body {
+  display: grid;
+  grid-template-areas: "entete paragraphe";
+}
 header {
   display: flex;
   width: 100%;
+  grid-area: "entete";
 }
 nav {
   margin-top: 58px;
 }
 h1 {
   margin: 44px 0 0 86px;
+  grid-area: "paragraphe";
+}
+h3 {
+  font-size: 13px;
+  font-weight: 400;
 }
 figcaption {
-  text-align: center;
-  font-family: var(--font-default);
   font-weight: 400;
   font-size: 36px;
   color: #d3573c;
@@ -41,13 +49,22 @@ figcaption {
   object-fit: cover;
 }
 .artist {
-  width: 526px;
-  height: 358px;
-  padding: 50px 164px 108px 162px;
+  display: block;
+  font-family: var(--font-default);
+  text-align: center;
+  padding: 0px 70px 50px 163px;
 }
 .boxImage {
   width: 200px;
   height: 200px;
   object-fit: cover;
   border-radius: 100px;
+}
+.content {
+  position: absolute;
+  top: 202px;
+  left: -63px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
