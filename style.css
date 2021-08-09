@@ -10,6 +10,7 @@
 body {
   display: grid;
   grid-template-areas: "entete paragraphe";
+  grid-template-columns: 70%;
 }
 header {
   display: flex;
@@ -24,6 +25,7 @@ h1 {
   font-weight: 400;
   color: #901c1c;
   margin-top: 50px;
+  margin-left: 20px;
   grid-area: "para";
 }
 h3 {
@@ -45,7 +47,7 @@ p {
   line-height: 20px;
 }
 #logo {
-  margin: 42px 86px 0 100px;
+  margin: 42px 60px 0 150px;
 }
 .styleBouton {
   background-color: transparent;
@@ -65,7 +67,7 @@ p {
   display: block;
   font-family: var(--font-default);
   text-align: center;
-  padding: 0px 70px 50px 130px;
+  padding: 0px 100px 50px 100px;
   font-weight: 400;
 }
 .boxImage {
@@ -77,28 +79,73 @@ p {
 .content {
   position: absolute;
   top: 202px;
-  left: -63px;
+  left: 0;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.flexible {
+  justify-content: center;
+  display: flex;
   flex-wrap: wrap;
 }
 @media screen and (max-width: 1024px) {
-  /*body {
-    grid-template-columns: 25% 50% 25%;
-    grid-template-rows: 50% 50%;
+  body {
+    grid-template-columns: 50%;
   }
   header {
-    display: grid;
+    flex-direction: column;
   }
-  nav {
-    grid-column: 2;
-    grid-row: 2;
+  .flexible {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    transform: translateX(50%);
+    min-width: 375px;
+  }
+  .content {
+    top: 250px;
+  }
+  #logo {
+    margin: 0;
+    padding-top: 42px;
+    display: flex;
+    justify-content: center;
   }
   h1 {
-    display: grid;
-    justify-content: end;
-  }*/
-  .artist {
-    padding: 0px 40px 50px 115px;
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #logo img {
+    width: 150px;
+    height: 37.5px;
+    margin-left: 20px;
+  }
+  h1 {
+    font-size: 14px;
+    margin-top: 52px;
+    margin-left: 50px;
+  }
+  .flexible {
+    width: 320px;
+    transform: translateX(12%);
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 580px) {
+  .flexible {
+    transform: translateX(25%);
+  }
+}
+@media screen and (min-width: 580px) and (max-width: 635px) {
+  .flexible {
+    transform: translateX(33%);
+  }
+}
+@media screen and (min-width: 635px) and (max-width: 695px) {
+  .flexible {
+    transform: translateX(40%);
   }
 }
