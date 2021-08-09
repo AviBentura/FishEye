@@ -17,20 +17,32 @@ header {
   grid-area: "entete";
 }
 nav {
-  margin-top: 58px;
+  margin-top: 52px;
 }
 h1 {
-  margin: 44px 0 0 86px;
-  grid-area: "paragraphe";
+  font-family: var(--font-default);
+  font-weight: 400;
+  color: #901c1c;
+  margin-top: 50px;
+  grid-area: "para";
 }
 h3 {
   font-size: 13px;
-  font-weight: 400;
+  color: #901c1c;
+  line-height: 20px;
+}
+h4 {
+  font-size: 9px;
+  line-height: 12px;
+  color: #757575;
 }
 figcaption {
-  font-weight: 400;
   font-size: 36px;
   color: #d3573c;
+}
+p {
+  font-size: 10px;
+  line-height: 20px;
 }
 #logo {
   margin: 42px 86px 0 100px;
@@ -43,6 +55,7 @@ figcaption {
   padding: 3px 7px;
   font-weight: bold;
   font-size: 12px;
+  margin-top: 6px;
 }
 .boxPhotographer {
   width: 100px;
@@ -52,7 +65,8 @@ figcaption {
   display: block;
   font-family: var(--font-default);
   text-align: center;
-  padding: 0px 70px 50px 163px;
+  padding: 0px 70px 50px 130px;
+  font-weight: 400;
 }
 .boxImage {
   width: 200px;
@@ -67,4 +81,24 @@ figcaption {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+@media screen and (max-width: 1024px) {
+  /*body {
+    grid-template-columns: 25% 50% 25%;
+    grid-template-rows: 50% 50%;
+  }
+  header {
+    display: grid;
+  }
+  nav {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  h1 {
+    display: grid;
+    justify-content: end;
+  }*/
+  .artist {
+    padding: 0px 40px 50px 115px;
+  }
 }
