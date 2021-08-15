@@ -70,6 +70,7 @@ p {
   text-align: center;
   padding: 0px 100px 50px 100px;
   font-weight: 400;
+  max-width: 425px;
 }
 .boxImage {
   width: 200px;
