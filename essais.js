@@ -1,4 +1,4 @@
-/*function getAllTags(photographers) {
+function getAllTags(photographers) {
   let tags = [];
   photographers.forEach((photographer) => {
     tags = tags.concat(photographer.tags);
@@ -29,4 +29,4 @@ fetch("data.json")
        document.querySelector('.flexible').innerHTML = tags.map(tag => `<button class="styleBouton">#${tag}</button>`);
        console.log("all tags", tags);
        })
-   })*/
+   })
