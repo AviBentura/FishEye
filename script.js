@@ -14,19 +14,15 @@ fetch("data.json")
   .then((res) => res.json())
   .then((data) => {
     data.photographers.forEach((photographer) => {
-      containePost.innerHTML += `<div class="artist"><figure class="boxContainer"><img class="boxImage" src="./FishEye_Photos/Photos/Photographers ID Photos/${photographer.portrait}"/></figure><figcaption>${photographer.name}</figcaption><h3>${photographer.city}, ${photographer.country}</h3><p>${photographer.tagline}</p><h4>${photographer.price}€/jour</h4>`;
-      let tags = getAllTags(data.photographers);
-      document.querySelector(".flexible").innerHTML = tags.map(
-        (tag) => `<button class="styleBouton">#${tag}</button>`
-      );
+      containePost.innerHTML +=
+        `<div class="artist"><figure class="boxContainer"><img class="boxImage" src="./FishEye_Photos/Photos/Photographers ID Photos/${photographer.portrait}"/></figure><figcaption>${photographer.name}</figcaption><h3>${photographer.city}, ${photographer.country}</h3><p>${photographer.tagline}</p><h4>${photographer.price}€/jour</h4>` +
+        photographer.tags
+          .map((x) => `<button class="styleBouton">#${x}</button>`)
+          .join("");
+      console.log(photographer.tags);
+      tags = getAllTags(data.photographers);
+      document.querySelector(".flexible").innerHTML = tags
+        .map((tag) => `<button class="styleBouton">#${tag}</button>`)
+        .join("");
     });
   });
-
-//let newContent = document.createElement("div");
-//newContent.classList = "artist";
-
-//let texte = document.createTextNode("Insere");
-
-//newContent.appendChild(texte);
-
-//document.containerPost.appendChild(newContent);
