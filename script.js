@@ -13,55 +13,63 @@ function getAllTags(photographers) {
 fetch("data.json")
   .then((res) => res.json())
   .then((data) => {
+    const tags = getAllTags(data.photographers);
     data.photographers.forEach((photographer) => {
-      containePost.innerHTML +=
-        `<div class="artist"><figure class="boxContainer"><img class="boxImage" src="./FishEye_Photos/Photos/Photographers ID Photos/${photographer.portrait}"/></figure><figcaption>${photographer.name}</figcaption><h3>${photographer.city}, ${photographer.country}</h3><p>${photographer.tagline}</p><h4>${photographer.price}€/jour</h4>` +
-        photographer.tags
-          .map(
-            (tagArtist) =>
-              `<button class="styleBouton ${tagArtist}">#${tagArtist}</button>`
-          )
-          .join("");
-      tags = getAllTags(data.photographers);
-      document.querySelector(".flexible").innerHTML = tags
-        .map(
-          (tag) =>
-            `<button class="styleBouton" data-filter="${tag}"><a href="#"></a>#${tag}</button>`
-        )
-        .join("");
-      document.querySelector(".flexible").addEventListener("click", () => {
-        const artist = photographer.tags
-          .map((x) => `<button class="styleBouton">#${x}</button>`)
-          .join("");
-
-        /*const result = data.photographers.filter((items) =>
-          items.tags.includes(artist)
-        );
-
-        console.log(result);*/
-        /*const filtreTexte = (arr, requete) => {
-          return arr.filter((el) => el.indexOf(requete) !== -1);
-        };*/
-
-        //console.log(filtreTexte(tags, "an"));
-      });
+      displayPhotograph(photographer);
+      displayNav(tags);
+      addListenersToTags(document);
     });
-    /*const Listen = document.getElementsByTagName("button");
-    console.log(Listen);
-    document.getElementsByTagName("button").addEventListener("click", () => {
-      //const tagSearch = document.querySelectorAll(".styleBouton").value;
-      console.log("tagSearch");
-    });*/
   });
 
-const tagArtists = document.getElementsByTagName("a");
+function displayPhotograph(photographer) {
+  containePost.innerHTML += `<div class="artist">
+  <figure class="boxContainer">
+  <img class="boxImage" src="./FishEye_Photos/Photos/Photographers ID Photos/${
+    photographer.portrait
+  }"/></figure>
+  <figcaption>${photographer.name}</figcaption>
+  <h3>${photographer.city}, ${photographer.country}</h3>
+  <p>${photographer.tagline}</p>
+  <h4>${photographer.price}€/jour</h4>${photographer.tags
+    .map(
+      (tagArtist) =>
+        `<button class="styleBouton tag ${tagArtist}" data-filter="${tagArtist}">${tagArtist}</button>`
+    )
+    .join("")}</div>`;
+}
 
-const tagArray = [];
-console.log(tagArtists);
+function displayNav(tags) {
+  document.querySelector(".flexible").innerHTML = tags
+    .map(
+      (tag) =>
+        `<button class="styleBouton tag ${tag}" data-filter="${tag}">#${tag}</button>`
+    )
+    .join("");
+}
 
-for (i = 0; i < tagArtists.length; i++) {
-  tagArtists[i].addEventListener("click", (event) => {
-    const filterTags = event.target.dataset.filter;
-    console.log(filterTags);
+function addListenersToTags(container, photographers) {
+  container.querySelectorAll(".tag").forEach((tag) => {
+    tag.addEventListener("click", (event) => {
+      const filterTags = event.target.dataset.filter;
+      console.log(filterTags);
+      filterPhotographers();
+      /*const filter = document.querySelectorAll(".tag");
+      filter.forEach((photographers) => {
+        if (filterTags == data.photographers.tags) {
+          containePost.innerHTML = "";
+        }
+      });*/
+    });
   });
+}
+
+function filterPhotographers() {
+  data.photographers.filter((photographer) =>
+    photographer.tags.include(filterTags)
+  );
+  containePost.innerHTML = "";
+  filterPhotographers.forEach((photographer) => {
+    containePost.innerHTML += displayPhotograph(photographer);
+  });
+  addListenersToTags(containePost, photographers);
 }

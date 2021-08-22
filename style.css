@@ -58,6 +58,7 @@ p {
   font-weight: bold;
   font-size: 12px;
   margin: 6px 0 0 5px;
+  cursor: pointer;
   /*text-transform: capitalize;*/
 }
 .boxPhotographer {
