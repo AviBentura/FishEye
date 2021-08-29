@@ -17,7 +17,7 @@ fetch("data.json")
     data.photographers.forEach((photographer) => {
       displayPhotograph(photographer);
       displayNav(tags);
-      addListenersToTags(document);
+      addListenersToTags(containePost, photographer);
     });
   });
 
@@ -27,7 +27,7 @@ function displayPhotograph(photographer) {
   <img class="boxImage" src="./FishEye_Photos/Photos/Photographers ID Photos/${
     photographer.portrait
   }"/></figure>
-  <figcaption>${photographer.name}</figcaption>
+  <figcaption class="colorTitle">${photographer.name}</figcaption>
   <h3>${photographer.city}, ${photographer.country}</h3>
   <p>${photographer.tagline}</p>
   <h4>${photographer.price}€/jour</h4>${photographer.tags
@@ -52,24 +52,14 @@ function addListenersToTags(container, photographers) {
     tag.addEventListener("click", (event) => {
       const filterTags = event.target.dataset.filter;
       console.log(filterTags);
-      filterPhotographers();
-      /*const filter = document.querySelectorAll(".tag");
-      filter.forEach((photographers) => {
-        if (filterTags == data.photographers.tags) {
-          containePost.innerHTML = "";
-        }
-      });*/
+      const filterPhotographers = photographers.filterTags.filter(
+        (photographer) => photographer.tags.includes(filterTags)
+      );
+      containePost.innerHTML = "";
+      filterPhotographers.forEach((photographer) => {
+        containePost.innerHTML += displayPhotograph(photographer);
+      });
+      addListenersToTags(containePost, photographers);
     });
   });
-}
-
-function filterPhotographers() {
-  data.photographers.filter((photographer) =>
-    photographer.tags.include(filterTags)
-  );
-  containePost.innerHTML = "";
-  filterPhotographers.forEach((photographer) => {
-    containePost.innerHTML += displayPhotograph(photographer);
-  });
-  addListenersToTags(containePost, photographers);
 }

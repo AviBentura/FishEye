@@ -1,3 +1,11 @@
+/***************************************/
+/***************************************/
+/*****                       ***********/
+/*****     PAGE D'ACCEUIL    ***********/
+/*****                       ***********/
+/***************************************/
+/***************************************/
+
 :root {
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
@@ -38,10 +46,6 @@ h4 {
   line-height: 12px;
   color: #757575;
 }
-figcaption {
-  font-size: 36px;
-  color: #d3573c;
-}
 p {
   font-size: 10px;
   line-height: 20px;
@@ -59,11 +63,7 @@ p {
   font-size: 12px;
   margin: 6px 0 0 5px;
   cursor: pointer;
-  /*text-transform: capitalize;*/
-}
-.boxPhotographer {
-  width: 100px;
-  object-fit: cover;
+  grid-area: "title";
 }
 .artist {
   display: block;
@@ -151,4 +151,137 @@ p {
   .flexible {
     transform: translateX(40%);
   }
+}
+
+/***************************************/
+/***************************************/
+/*****                       ***********/
+/*****   PAGES PHOTOGRAPHES  ***********/
+/*****                       ***********/
+/***************************************/
+/***************************************/
+
+.colorTitle {
+  font-size: 36px;
+  color: #d3573c;
+}
+.boxPhotographers h1 {
+  font-size: 64px;
+  margin-left: 46px;
+}
+
+.boxPhotographers {
+  font-family: var(--font-default);
+  background: #fafafa;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.boxPhotographers h3 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-left: 50px;
+  margin-top: 0.5rem;
+}
+.boxPhotographers p {
+  font-size: 18px;
+  font-weight: 400;
+  margin-left: 50px;
+  color: #525252;
+  margin-top: 20px;
+}
+.contactButton {
+  /*padding: 31% 6.7% 31% 6.7%;*/
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 26px;
+  background: #911c1c;
+  border-radius: 5px;
+  color: #fff;
+  border: none;
+  height: 69px;
+  width: 170px;
+  margin-top: 50px;
+  margin-left: -250px;
+}
+.boxPhoto {
+  width: 500px;
+  height: 500px;
+}
+.boxPhoto img {
+  object-fit: cover;
+}
+.displayBody {
+  display: block;
+}
+.boxContainer {
+  margin-top: 50px;
+}
+.displayMain {
+  margin: 30px 100px 0 100px;
+}
+.logoImg {
+  margin-left: -50px;
+}
+.containerFlex {
+  font-family: var(--font-default);
+}
+.containerFlex nav {
+  display: flex;
+}
+.bouton {
+  margin-top: 16px;
+  margin-left: 45px;
+}
+.modal {
+  width: 170px;
+  height: 170px;
+  background-color: #901c1c;
+  border-radius: 5px;
+  position: relative;
+}
+.modal a {
+  color: #fff;
+}
+nav a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+}
+.buttonPage {
+  font-size: 14px;
+}
+.btn-fleche {
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  cursor: pointer;
+  transform: scale(0.4);
+}
+.btn-fleche:before,
+.btn-fleche:after {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 8px;
+  background-color: #fff;
+}
+.btn-fleche:before {
+  transform: rotate(45deg);
+  transform-origin: -50% -20%;
+}
+.btn-fleche:after {
+  transform: rotate(-45deg);
+}
+.modal div {
+  display: flex;
+  flex-direction: column;
 }
