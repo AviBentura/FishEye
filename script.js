@@ -17,7 +17,7 @@ fetch("data.json")
     data.photographers.forEach((photographer) => {
       displayPhotograph(photographer);
       displayNav(tags);
-      addListenersToTags(document);
+      addListenersToTags(document, data.photographers);
     });
   });
 
@@ -50,14 +50,15 @@ function displayNav(tags) {
 function addListenersToTags(container, photographers) {
   container.querySelectorAll(".tag").forEach((tag) => {
     tag.addEventListener("click", (event) => {
-      /*const filterTags =  event.target.dataset.filter;
-      console.log(event.target.dataset.filter);*/
-      const filterPhotographers = photographers.event.target.dataset.filter(
-        (photographer) => photographer.tags.includes(filterTags)
+      const filterTags = event.target.dataset.filter;
+      console.log(event.target.dataset.filter);
+      const filterPhotographers = photographers.filter((photographer) =>
+        photographer.tags.includes(filterTags)
       );
+      console.log(filterPhotographers);
       containePost.innerHTML = "";
       filterPhotographers.forEach((photographer) => {
-        containePost.innerHTML += displayPhotograph(photographer);
+        displayPhotograph(photographer);
       });
       addListenersToTags(containePost, photographers);
     });
