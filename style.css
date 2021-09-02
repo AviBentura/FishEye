@@ -169,7 +169,7 @@ p {
 /***************************************/
 /***************************************/
 
-/*.colorTitle {
+.colorTitle {
   font-size: 36px;
   color: #d3573c;
 }
@@ -282,7 +282,7 @@ nav a {
   padding: 14px 0 14px 0;
   font-family: var(--font-default);
 }
-nav div {
+.Pop {
   border-bottom: 1px solid #fff;
   padding: 14px 0 14px 0;
 }
@@ -353,6 +353,9 @@ nav div {
 .info-icon {
   padding-top: 12px;
 }
+.containerButton {
+  display: none;
+}
 @media screen and (max-width: 1440px) {
   .boxPhotographers {
     display: grid;
@@ -361,5 +364,98 @@ nav div {
   .contactButton {
     margin-left: 0;
   }
+  .caroussel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #logo {
+    justify-content: flex-start;
+    margin-left: 150px;
+  }
 }
-*/
+@media screen and (max-width: 1024px) {
+  .modal-info {
+    display: none;
+  }
+  .contactButton {
+    display: none;
+  }
+  .ButtonIphone {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 18px;
+    line-height: 26px;
+    background: #911c1c;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    height: 35px;
+    width: 170px;
+    position: fixed;
+    bottom: 30px;
+    z-index: 9999;
+  }
+  .containerButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  .boxImage {
+    width: 100px;
+    height: 100px;
+  }
+  .sort,
+  .modal {
+    display: none;
+  }
+  .displayMain {
+    margin: 30px 0 0 0;
+  }
+  .logoImg {
+    margin-left: -100px;
+  }
+  .boxPhotographers {
+    background: none;
+    display: flex;
+  }
+  .boxPhotographers h1 {
+    font-size: 36px;
+  }
+}
+@media screen and (max-width: 500px) {
+  #logo .logoImg {
+    width: 150px;
+    height: 37.5px;
+    margin-left: -100px;
+  }
+}
+@media screen and (max-width: 425px) {
+  .colorTitle {
+    margin: 0;
+  }
+  .boxPhotographers h3 {
+    font-size: 13px;
+    margin-top: 0;
+  }
+  .boxPhotographers p {
+    font-size: 13px;
+    margin-top: 0;
+  }
+  .buttonPage {
+    font-size: 12px;
+  }
+  .bouton {
+    margin-top: 0;
+  }
+  .boxImage {
+    margin-top: -50px;
+  }
+  .boxPhoto {
+    margin: 0;
+    justify-content: center;
+    display: flex;
+  }
+}
