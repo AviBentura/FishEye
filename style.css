@@ -69,6 +69,18 @@ p {
   cursor: pointer;
   /*text-transform: capitalize;*/
 }
+.stylebouton {
+  background-color: transparent;
+  border-radius: 11px;
+  border: 0.5px solid #c4c4c4;
+  color: #901c1c;
+  padding: 3px 7px;
+  font-weight: bold;
+  font-size: 12px;
+  margin: 6px 0 0 5px;
+  cursor: pointer;
+  /*text-transform: capitalize;*/
+}
 .boxPhotographer {
   width: 100px;
   object-fit: cover;
@@ -87,6 +99,12 @@ p {
   object-fit: cover;
   border-radius: 100px;
 }
+.boxImagePhotographers {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 100px;
+}
 .content {
   position: absolute;
   top: 202px;
@@ -100,6 +118,12 @@ p {
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
+}
+.content a {
+  text-decoration: none;
+}
+.content p {
+  color: black;
 }
 @media screen and (max-width: 1024px) {
   body {
@@ -160,6 +184,11 @@ p {
     transform: translateX(40%);
   }
 }
+@media screen and (max-width: 425px) {
+  body {
+    min-width: 425px;
+  }
+}
 
 /***************************************/
 /***************************************/
@@ -168,7 +197,9 @@ p {
 /*****                       ***********/
 /***************************************/
 /***************************************/
-
+#logoImg {
+  margin: 42px 60px 0 150px;
+}
 .colorTitle {
   font-size: 36px;
   color: #d3573c;
@@ -295,6 +326,9 @@ nav a {
 .buttonPage {
   font-size: 14px;
 }
+.buttonpage {
+  font-size: 14px;
+}
 .btn-fleche {
   background: transparent;
   border: none;
@@ -356,6 +390,9 @@ nav a {
 .containerButton {
   display: none;
 }
+span.info-icon {
+  padding-top: 22px;
+}
 @media screen and (max-width: 1440px) {
   .boxPhotographers {
     display: grid;
@@ -369,10 +406,10 @@ nav a {
     flex-wrap: wrap;
     justify-content: center;
   }
-  #logo {
+  /*/#logo {
     justify-content: flex-start;
     margin-left: 150px;
-  }
+  }*/
 }
 @media screen and (max-width: 1024px) {
   .modal-info {
@@ -403,33 +440,30 @@ nav a {
   }
 }
 @media screen and (max-width: 768px) {
-  .boxImage {
+  .boxImagePhotographers {
     width: 100px;
     height: 100px;
-  }
-  .sort,
-  .modal {
-    display: none;
   }
   .displayMain {
     margin: 30px 0 0 0;
   }
-  .logoImg {
-    margin-left: -100px;
+  #logoImg {
+    margin-left: 30px;
   }
   .boxPhotographers {
     background: none;
     display: flex;
+    margin-left: -20px;
   }
   .boxPhotographers h1 {
     font-size: 36px;
   }
 }
 @media screen and (max-width: 500px) {
-  #logo .logoImg {
+  #logoImg {
     width: 150px;
     height: 37.5px;
-    margin-left: -100px;
+    margin-left: 27px;
   }
 }
 @media screen and (max-width: 425px) {
@@ -447,15 +481,29 @@ nav a {
   .buttonPage {
     font-size: 12px;
   }
+  .buttonpage {
+    font-size: 12px;
+  }
   .bouton {
     margin-top: 0;
   }
-  .boxImage {
+  .boxImagePhotographers {
     margin-top: -50px;
   }
   .boxPhoto {
     margin: 0;
     justify-content: center;
     display: flex;
+  }
+  .displayBody {
+    min-width: 425px;
+  }
+  .navbar {
+    display: none;
+  }
+  .likes figcaption,
+  .likes span,
+  .fas {
+    font-size: 14px;
   }
 }

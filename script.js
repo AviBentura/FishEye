@@ -6,7 +6,6 @@ function getAllTags(photographers) {
     tags = tags.concat(photographer.tags);
   });
   let tagSet = new Set(tags);
-  //console.log(tagSet);
   return Array.from(new Set(tags));
 }
 
@@ -22,7 +21,9 @@ fetch("data.json")
   });
 
 function displayPhotograph(photographer) {
-  containePost.innerHTML += `<div class="artist">
+  containePost.innerHTML += `<a href="photographePage.html?id=${
+    photographer.id
+  }"><div class="artist">
   <figure class="boxContainer">
   <img class="boxImage" src="./FishEye_Photos/Photos/Photographers ID Photos/${
     photographer.portrait
@@ -35,7 +36,7 @@ function displayPhotograph(photographer) {
       (tagArtist) =>
         `<button class="styleBouton tag ${tagArtist}" data-filter="${tagArtist}">${tagArtist}</button>`
     )
-    .join("")}</div>`;
+    .join("")}</div></a>`;
 }
 
 function displayNav(tags) {
