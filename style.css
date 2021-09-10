@@ -289,21 +289,91 @@ nav {
   margin-top: 16px;
   margin-left: 45px;
 }
+
 .modal {
+  object-fit: cover;
   padding: 10px;
-  width: 170px;
+  width: 12.6%;
   height: 170px;
   background-color: #901c1c;
   border-radius: 5px;
   position: absolute;
   left: 200px;
-  display: flex;
+  display: none;
   flex-direction: column;
   border: none;
   z-index: 999;
+  animation: scale-down-ver-top 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s
+    both;
+}
+
+@keyframes scale-down-ver-top {
+  0% {
+    height: 65px;
+    transform-origin: 100% 0;
+  }
+  100% {
+    height: 170px;
+    transform-origin: 100% 0;
+  }
+}
+
+@keyframes scale-down-ver-down {
+  0% {
+    height: 170px;
+    transform-origin: 100% 0;
+  }
+  100% {
+    height: 65px;
+    transform-origin: 100% 0;
+  }
 }
 .modal a {
   color: #fff;
+}
+.modal-close {
+  padding: 10px;
+  width: 170px;
+  height: 65px;
+  background-color: #901c1c;
+  border-radius: 5px;
+  position: absolute;
+  left: 200px;
+}
+.modal-close a {
+  color: #fff;
+}
+.Pop-close {
+  padding: 14px 0 14px 0;
+}
+.btn-fleche-close {
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  cursor: pointer;
+  transform: scale(-0.4);
+}
+.btn-fleche-close:before,
+.btn-fleche-close:after {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 8px;
+  background-color: #fff;
+}
+.btn-fleche-close:before {
+  transform: rotate(45deg);
+  transform-origin: -50% -20%;
+}
+.btn-fleche-close:after {
+  transform: rotate(-45deg);
 }
 nav a {
   text-decoration: none;
@@ -314,12 +384,26 @@ nav a {
   font-family: var(--font-default);
 }
 .Pop {
-  border-bottom: 1px solid #fff;
   padding: 14px 0 14px 0;
-}
-.border {
   border-bottom: 1px solid #fff;
 }
+
+.border {
+  animation: line-border 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
+}
+
+@keyframes line-border {
+  0% {
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+  }
+  90% {
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+  }
+  100% {
+    border-bottom: 1px solid #fff;
+  }
+}
+
 .sort {
   padding-bottom: 58px;
 }
