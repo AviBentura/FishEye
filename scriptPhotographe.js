@@ -25,28 +25,36 @@ fetch("data.json")
     // J'éxécute la fonction displayPage avec pour parametre le morceaux de mon document.
     displayPage(photographerPage);
 
+    // Je crée une variable qui va récupérer le nom correspondant à l'id séléctionné
     const mediaName = data.photographers.find((name) => name.id == params2);
+    // Ce nom est mis en minuscule et l'espace entre nom et prénom supprimé
+    //Je ne récupére que le prénom et j'éxtrès la chaine de caractère du tableau
     const nameFolder = mediaName.name
       .split(" ")
       .slice(0, -1)
       .toString()
       .toLowerCase();
 
+    // Je crée une boucle qui dit que pour chaque élément correspondant à l'id j'éxécute une condition
     data.media.forEach((photographerMedia) => {
+      // Si l'image existe j'éxécute la fonction displayPhoto
       if (
         photographerMedia.photographerId == params2 &&
         photographerMedia.image != undefined
       ) {
-        displayMedia(photographerMedia);
+        displayPhoto(photographerMedia);
+        // Si l'image n'existe pas dans le tableau j'éxécute la fonction displayMedia
       } else if (
         photographerMedia.photographerId == params2 &&
         photographerMedia.image == undefined
       ) {
-        displayPhoto(photographerMedia);
+        displayMedia(photographerMedia);
       }
     });
 
-    function displayMedia(photographerMedia) {
+    // fonction displayPhoto qui va ajouté du code html au niveau de la div avec la classe caroussel
+    //pour afficher la photo
+    function displayPhoto(photographerMedia) {
       carousselMedia.innerHTML += `<div class="containerFlex">
           <div>
             <a href="#">
@@ -68,7 +76,9 @@ fetch("data.json")
         </div>`;
     }
 
-    function displayPhoto(photographerMedia) {
+    // fonction displayPhoto qui va ajouté du code html au niveau de la div avec la classe caroussel
+    //pour afficher la vidéo
+    function displayMedia(photographerMedia) {
       carousselMedia.innerHTML += `<div class="containerFlex">
           <div>
             <a href="#">
