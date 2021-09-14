@@ -3,6 +3,8 @@ const containePage = document.querySelector(".containerImport");
 // Création de la variable attaché à l'élement HTML qui contient les tags photographe dans le banner
 const containerButton = document.querySelector(".bouton");
 
+const carousselMedia = document.querySelector(".caroussel");
+
 // Création de la variable qui va chercher dans la page l'url
 let url = window.location.search;
 // Je formate avec URLSearchParams les informations à récupérer
@@ -22,6 +24,71 @@ fetch("data.json")
     );
     // J'éxécute la fonction displayPage avec pour parametre le morceaux de mon document.
     displayPage(photographerPage);
+
+    const mediaName = data.photographers.find((name) => name.id == params2);
+    const nameFolder = mediaName.name
+      .split(" ")
+      .slice(0, -1)
+      .toString()
+      .toLowerCase();
+
+    data.media.forEach((photographerMedia) => {
+      if (
+        photographerMedia.photographerId == params2 &&
+        photographerMedia.image != undefined
+      ) {
+        displayMedia(photographerMedia);
+      } else if (
+        photographerMedia.photographerId == params2 &&
+        photographerMedia.image == undefined
+      ) {
+        displayPhoto(photographerMedia);
+      }
+    });
+
+    function displayMedia(photographerMedia) {
+      carousselMedia.innerHTML += `<div class="containerFlex">
+          <div>
+            <a href="#">
+              <figure class="boxPhoto"><img
+                  src="/FishEye_Photos/Photos/${nameFolder}/${photographerMedia.image}"
+                  class="boxPhoto"
+
+                />
+              </figure>
+            </a>
+            <div class="likes">
+              <figcaption>Arc-en-cie</figcaption>
+              <div class="block">
+                <span>12</span>
+                <i class="fas fa-heart"></i>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function displayPhoto(photographerMedia) {
+      carousselMedia.innerHTML += `<div class="containerFlex">
+          <div>
+            <a href="#">
+              <video class="boxPhoto" controls>
+                <source
+                  src="./FishEye_Photos/Photos/${nameFolder}/${photographerMedia.video}" class="boxPhoto"
+                  type="video/mp4" class="box-video"
+                />
+              </video>
+            </a>
+            <div class="likes">
+              <figcaption>Arc-en-cie</figcaption>
+              <div class="block">
+                <span>12</span>
+                <i class="fas fa-heart"></i>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }
   });
 
 // Fonction qui va écrire mon code HTML en récuperant les informations du photographe en question
@@ -73,25 +140,21 @@ function launchModal() {
 const toClose = document.querySelectorAll(".btn-fleche");
 
 // Lancement fermeture de l'évenement sur la modal au click par la fleche
-toClose.forEach((btn) =>
-  btn.addEventListener("click", closeModal, borderClosure)
-);
+toClose.forEach((btn) => btn.addEventListener("click", closeModal));
 
-function borderClosure() {
-  border.style.animationName = "line-border-reverse";
-}
-// close modal form
+// Fonction closeModal qui va modifier des elements de styles sur le block modal et modal-close
 function closeModal() {
-  //modal.style.display = "none";
   modal.style.animationName = "scale-down-ver-down";
   modalClose.style.display = "block";
   modalClose.style.zIndex = "1";
+  // Utilisation d'un timer pour créer de la fluidité sur la disparition de la bordure de l'élement 'date'
   setTimeout(function () {
     border.style.animationDirection = "reverse";
   }, 350);
+  // Réinitialisation des parametres d'origine à la fin de l'animation de retour
   setTimeout(function () {
     modal.style.display = "none";
     modal.style.animationName = "scale-down-ver-top";
     border.style.animationDirection = "normal";
-  }, 850);
+  }, 820);
 }

@@ -251,6 +251,9 @@ p {
 .boxPhoto img {
   object-fit: cover;
 }
+.box-video {
+  background-video
+}
 .containerFlex {
   width: 370px;
 }
