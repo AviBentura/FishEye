@@ -1,41 +1,22 @@
-// Création de la variable attaché à l'élement HTML qui contient le banner photographer
-const containePage = document.querySelector(".containerImport");
-// Création de la variable attaché à l'élement HTML qui contient les tags photographe dans le banner
-const containerButton = document.querySelector(".bouton");
-
-const carousselMedia = document.querySelector(".caroussel");
-
-// Création de la variable qui va chercher dans la page l'url
-let url = window.location.search;
-// Je formate avec URLSearchParams les informations à récupérer
-let params = new URLSearchParams(url);
-// Je demande à récuperer la string id => ?id=243
-let params2 = params.get("id");
-// J'importe mon document qui contient les informations des photographes
-fetch("data.json")
+fetch("JS/data.json")
   // Je demande une réponse de type JSON
   .then((res) => res.json())
   // Sur un document correspondant à data
   .then((data) => {
-    // Je crée une variable qui va venir chercher dans mon document l'élement ID
-    const photographerPage = data.photographers.find(
-      // En demandant que l'id de l'url et du document corresponder
-      (element) => element.id == params2
-    );
     // J'éxécute la fonction displayPage avec pour parametre le morceaux de mon document.
-    displayPage(photographerPage);
+    displayPage;
 
-    // Je crée une variable qui va récupérer le nom correspondant à l'id séléctionné
-    const mediaName = data.photographers.find((name) => name.id == params2);
-    // Ce nom est mis en minuscule et l'espace entre nom et prénom supprimé
-    //Je ne récupére que le prénom et j'éxtrès la chaine de caractère du tableau
-    const nameFolder = mediaName.name
-      .split(" ")
-      .slice(0, -1)
-      .toString()
-      .toLowerCase();
-
-    // Je crée une boucle qui dit que pour chaque élément correspondant à l'id j'éxécute une condition
+    function factory(media) {
+      if (media.image) {
+        displayPhoto(photographerMedia);
+      }
+      if (media.video) {
+        displayMedia(photographerMedia);
+      }
+      return undefined;
+    }
+    factory(media);
+    /*// Je crée une boucle qui dit que pour chaque élément correspondant à l'id j'éxécute une condition
     data.media.forEach((photographerMedia) => {
       // Si l'image existe j'éxécute la fonction displayPhoto
       if (
@@ -52,6 +33,15 @@ fetch("data.json")
       }
     });
 
+
+    data.media.forEach((photographeLikes) => {
+      if (photographeLikes.photographerId == params2) {
+        displaySum(photographeLikes);
+      }
+    });*/
+
+    displayModalInfo();
+
     // fonction displayPhoto qui va ajouté du code html au niveau de la div avec la classe caroussel
     //pour afficher la photo
     function displayPhoto(photographerMedia) {
@@ -66,9 +56,9 @@ fetch("data.json")
               </figure>
             </a>
             <div class="likes">
-              <figcaption>Arc-en-cie</figcaption>
+              <figcaption>${photographerMedia.title}</figcaption>
               <div class="block">
-                <span>12</span>
+                <span>${photographerMedia.likes}</span>
                 <i class="fas fa-heart"></i>
               </div>
             </div>
@@ -99,32 +89,24 @@ fetch("data.json")
           </div>
         </div>`;
     }
+
+    function displayModalInfo() {
+      modalInfo.innerHTML += `<div class="block info-icon">
+        </div>
+        <span class="info-icon">${mediaName.price}€/jour</span>`;
+    }
+
+    function displaySum(photographeLikes) {
+      sum.innerHTML += `<span>${photographeLikes.likes}</span>
+          <i class="fas fa-heart"></i>`;
+    }
   });
 
-// Fonction qui va écrire mon code HTML en récuperant les informations du photographe en question
-function displayPage(photographerPage) {
-  containePage.innerHTML += `<div class="boxPhotographers">
-        <div>
-          <h1 class="colorTitle">${photographerPage.name}</h1>
-          <h3>${photographerPage.city}, ${photographerPage.country}</h3>
-          <p>${photographerPage.tagline}</p>
-          <div class="bouton">${(containerButton.innerHTML +=
-            photographerPage.tags
-              .map(
-                (tagArtist) =>
-                  `<button class="styleBouton tag ${tagArtist}" data-filter="${tagArtist}">${tagArtist}</button>`
-              )
-              .join(""))}</div>
-        </div>
-        <button class="contactButton">Contactez-moi</button>
-        <figure class="boxContainer">
-          <img class="boxImagePhotographers" src="./FishEye_Photos/Photos/Photographers ID Photos/${
-            photographerPage.portrait
-          }"/>
-        </figure>
-      </div>`;
-}
-
+import {
+  displayPage,
+  photographerID as fonctionPagePhotographe,
+} from "./function.js";
+fonctionPagePhotographe;
 // Variable attaché à la fleche du menu deroulant "popularité"
 const modalOpen = document.querySelectorAll(".btn-fleche-close");
 
