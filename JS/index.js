@@ -15,5 +15,3 @@ import {
   displayNav,
   addListenersToTags as fonctionPageDAcceuil,
 } from "./function.js";
-
-fonctionPageDAcceuil;

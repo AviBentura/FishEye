@@ -1,3 +1,7 @@
+import { launchModal, closeModal /*, triTitre*/ } from "./modal.js";
+
+export { displayPhotoParTitre };
+
 // Création de la variable attaché à l'élement HTML qui contient le banner photographer
 const containePage = document.querySelector(".containerImport");
 // Création de la variable attaché à l'élement HTML qui contient les tags photographe dans le banner
@@ -43,6 +47,7 @@ fetch("JS/data.json")
     const mediaPhotos = data.media.filter(
       (media) => media.photographerId == params2
     );
+
     // Je crée une boucle qui dit que pour chaque élément correspondant à l'id j'éxécute une condition
     data.media.forEach((photographerMedia) => {
       // Si l'image existe j'éxécute la fonction displayPhoto
@@ -76,7 +81,14 @@ fetch("JS/data.json")
     const likeTotal = nombLikes.reduce(reducer, 0);
 
     displayModalInfo(mediaName, likeTotal);
+
+    //triTitre(mediaPhotos);
+
+    displayPhotoParTitre(mediaPhotos, nameFolder);
   });
+
+launchModal();
+closeModal();
 
 // Fonction qui va écrire mon code HTML en récuperant les informations du photographe en question
 function displayPage(media) {
@@ -105,50 +117,6 @@ function displayModalInfo(pricing, likeTotal) {
   modalInfo.innerHTML += `<div class="block info-icon"><span>${likeTotal} </span><i class="fas fa-heart"></div></i><span class="info-icon">${pricing.price}€ / jour</span></div>`;
 }
 
-// Variable attaché à la fleche du menu deroulant "popularité"
-const modalOpen = document.querySelectorAll(".btn-fleche-close");
-
-// Lancement de l'évenement de la modal au click sur la fleche
-modalOpen.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// Variable rataché au block navigation
-const modal = document.querySelector(".modal");
-
-// Variable rataché au block navigation
-const modalClose = document.querySelector(".modal-close");
-
-// Variable rataché a la bordure de 'date' dans l'element navigation
-const border = document.querySelector(".border");
-
-// Lancement de la fonction qui va effectuer l'action sur la modal
-function launchModal() {
-  modal.style.display = "flex";
-  modalClose.style.display = "none";
-}
-
-// Variable attaché à la fleche du menu deroulant "popularité, date, titre"
-const toClose = document.querySelectorAll(".btn-fleche");
-
-// Lancement fermeture de l'évenement sur la modal au click par la fleche
-toClose.forEach((btn) => btn.addEventListener("click", closeModal));
-
-// Fonction closeModal qui va modifier des elements de styles sur le block modal et modal-close
-function closeModal() {
-  modal.style.animationName = "scale-down-ver-down";
-  modalClose.style.display = "block";
-  modalClose.style.zIndex = "1";
-  // Utilisation d'un timer pour créer de la fluidité sur la disparition de la bordure de l'élement 'date'
-  setTimeout(function () {
-    border.style.animationDirection = "reverse";
-  }, 350);
-  // Réinitialisation des parametres d'origine à la fin de l'animation de retour
-  setTimeout(function () {
-    modal.style.display = "none";
-    modal.style.animationName = "scale-down-ver-top";
-    border.style.animationDirection = "normal";
-  }, 820);
-}
-
 function displayPhoto(media, folder) {
   carousselMedia.innerHTML += `<div class="containerFlex">
           <div>
@@ -169,6 +137,28 @@ function displayPhoto(media, folder) {
             </div>
           </div>
         </div>`;
+}
+
+function displayPhotoParTitre(media, folder) {
+  /*carousselMedia.innerHTML += `<div class="containerFlex">
+          <div>
+            <a href="#">
+              <figure class="boxPhoto"><img
+                  src="/FishEye_Photos/Photos/${folder}/${media.image}"
+                  class="boxPhoto"
+
+                />
+              </figure>
+            </a>
+            <div class="likes">
+              <figcaption>${media.title}</figcaption>
+              <div class="block">
+                <span>${media.likes}</span>
+                <i class="fas fa-heart"></i>
+              </div>
+            </div>
+          </div>
+        </div>`;*/
 }
 
 function displayMedia(photographerMedia, nameFolder) {
