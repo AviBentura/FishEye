@@ -1,5 +1,3 @@
-const containePost = document.querySelector(".content");
-
 function getAllTags(photographers) {
   let tags = [];
   photographers.forEach((photographer) => {
@@ -10,6 +8,7 @@ function getAllTags(photographers) {
 }
 
 function displayPhotograph(photographer) {
+  const containePost = document.querySelector(".content");
   containePost.innerHTML += `<a href="photographePage.html?id=${
     photographer.id
   }"><div class="artist">
@@ -53,4 +52,127 @@ function addListenersToTags(container, photographers) {
   });
 }
 
-export { displayPhotograph, displayNav, getAllTags, addListenersToTags };
+// fonction de la page indexPagePhotographe.js
+
+function displayMediaPhotographer(media, folder) {
+  media.forEach((medias) => {
+    // Si l'image existe j'éxécute la fonction displayPhoto
+    if (medias.image != undefined) {
+      displayPhoto(medias, folder);
+      // Si l'image n'existe pas dans le tableau j'éxécute la fonction displayMedia
+    } else if (medias.image == undefined) {
+      displayVideo(medias, folder);
+    }
+  });
+}
+
+// Fonction qui va écrire mon code HTML en récuperant les informations du photographe en question
+function displayBannerPage(media) {
+  const containePage = document.querySelector(".containerImport");
+  const containerBouton = document.querySelector(".bouton");
+  containePage.innerHTML += `<div class="boxPhotographers">
+        <div>
+          <h1 class="colorTitle">${media.name}</h1>
+          <h3>${media.city}, ${media.country}</h3>
+          <p>${media.tagline}</p>
+          <div class="bouton">${(containerBouton.innerHTML += media.tags
+            .map(
+              (tagArtist) =>
+                `<button class="styleBouton tag ${tagArtist}" data-filter="${tagArtist}">${tagArtist}</button>`
+            )
+            .join(""))}</div>
+        </div>
+        <button class="contactButton">Contactez-moi</button>
+        <figure class="boxContainer">
+          <img class="boxImagePhotographers" src="./FishEye_Photos/Photos/Photographers ID Photos/${
+            media.portrait
+          }"/>
+        </figure>
+      </div>`;
+}
+
+function displayModalInfo(pricing, likeTotal) {
+  const modalInfo = document.querySelector(".modal-info");
+  modalInfo.innerHTML += `<div class="block info-icon"><span>${likeTotal} </span><i class="fas fa-heart"></div></i><span class="info-icon">${pricing.price}€ / jour</span></div>`;
+}
+
+function displayPhoto(media, folder) {
+  const carousselMedia = document.querySelector(".caroussel");
+  carousselMedia.innerHTML += `<div class="containerFlex">
+          <div>
+            <a href="#">
+              <figure class="boxPhoto"><img
+                  src="/FishEye_Photos/Photos/${folder}/${media.image}"
+                  class="boxPhoto"
+
+                />
+              </figure>
+            </a>
+            <div class="likes">
+              <figcaption>${media.title}</figcaption>
+              <div class="block">
+                <span>${media.likes}</span>
+                <i class="fas fa-heart"></i>
+              </div>
+            </div>
+          </div>
+        </div>`;
+}
+
+function displayPhotoParTitre(media, folder) {
+  /*carousselMedia.innerHTML += `<div class="containerFlex">
+          <div>
+            <a href="#">
+              <figure class="boxPhoto"><img
+                  src="/FishEye_Photos/Photos/${folder}/${media.image}"
+                  class="boxPhoto"
+
+                />
+              </figure>
+            </a>
+            <div class="likes">
+              <figcaption>${media.title}</figcaption>
+              <div class="block">
+                <span>${media.likes}</span>
+                <i class="fas fa-heart"></i>
+              </div>
+            </div>
+          </div>
+        </div>`;*/
+}
+
+function displayVideo(media, folder) {
+  const carousselMedia = document.querySelector(".caroussel");
+  carousselMedia.innerHTML += `<div class="containerFlex">
+          <div>
+            <a href="#">
+              <video class="boxPhoto" controls>
+                <source
+                  src="./FishEye_Photos/Photos/${folder}/${media.video}" class="boxPhoto"
+                  type="video/mp4" class="box-video"
+                />
+              </video>
+            </a>
+            <div class="likes">
+              <figcaption>${media.title}</figcaption>
+              <div class="block">
+                <span>${media.likes}</span>
+                <i class="fas fa-heart"></i>
+              </div>
+            </div>
+          </div>
+        </div>`;
+}
+
+export {
+  displayPhotograph,
+  displayNav,
+  getAllTags,
+  addListenersToTags,
+  displayMediaPhotographer,
+  displayBannerPage,
+  displayModalInfo,
+  displayPhoto,
+  displayPhotoParTitre,
+  displayVideo,
+};
