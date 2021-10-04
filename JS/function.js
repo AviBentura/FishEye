@@ -164,6 +164,15 @@ function displayVideo(media, folder) {
         </div>`;
 }
 
+function displayMediaParPopularite(media, folder) {
+  if (media.image != undefined) {
+    displayPhoto(media, folder);
+    // Si l'image n'existe pas dans le tableau j'éxécute la fonction displayMedia
+  } else if (media.image == undefined) {
+    displayVideo(media, folder);
+  }
+}
+
 export {
   displayPhotograph,
   displayNav,
@@ -175,4 +184,5 @@ export {
   displayPhoto,
   displayPhotoParTitre,
   displayVideo,
+  displayMediaParPopularite,
 };

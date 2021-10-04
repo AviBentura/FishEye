@@ -1,14 +1,14 @@
 import {
   closeBoxSelection,
   openBoxSelection,
-  triDuSelectionneur /*triTitre*/,
+  removeCaroussel,
 } from "./modal.js";
 
 import {
   displayMediaPhotographer,
   displayBannerPage,
   displayModalInfo,
-  displayPhotoParTitre,
+  displayMediaParPopularite,
 } from "./function.js";
 
 function getId() {
@@ -48,15 +48,33 @@ fetch("JS/data.json")
 
     displayModalInfo(mediaName, sommeTotalLikes);
 
-    //triTitre(mediaPhotos);
-
     let triMediaParPopularité = mediaPhotos.sort((a, b) => a.likes - b.likes);
 
-    console.log(triMediaParPopularité);
+    let triMediaParTitre = new Media(triMediaParPopularité);
 
-    displayPhotoParTitre(mediaPhotos, nameFolder);
+    let mediaParPopularité = 0;
+
+    const populaire = document.querySelector(".populaire");
+    populaire.addEventListener("click", function triParPopularité() {
+      removeCaroussel();
+      triMediaParPopularité.forEach((media) => {
+        mediaParPopularité = displayMediaParPopularite(media, nameFolder);
+      });
+    });
+
+    //let triMediaParTitre = triMediaParPopularité.reverse();
+
+    console.log(triMediaParTitre);
+    let mediaParTitre = 0;
+
+    const titre = document.querySelector(".titre");
+    titre.addEventListener("click", function triParTitre() {
+      removeCaroussel();
+      /*triMediaParTitre.forEach((media) => {
+        mediaParTitre = displayMediaParPopularite(media, nameFolder);
+      });*/
+    });
   });
 
 openBoxSelection();
 closeBoxSelection();
-triDuSelectionneur();

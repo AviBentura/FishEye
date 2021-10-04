@@ -1,4 +1,4 @@
-import {} from "./function.js";
+//import { triParPopularité } from "./indexPagePhotographe.js";
 
 function openBoxSelection() {
   const selectionneurOpen = document.querySelectorAll(".btn-fleche-close");
@@ -41,9 +41,6 @@ function closeSelectionneur() {
 }
 
 function triDuSelectionneur() {
-  const populaire = document.querySelector(".populaire");
-  populaire.addEventListener("click", triParPopularité);
-
   const date = document.querySelector(".date");
   date.addEventListener("click", fonction);
 
@@ -55,13 +52,18 @@ function fonction() {
   console.log("tri");
 }
 
-function triParPopularité(media) {
+function removeCaroussel() {
   const carousselMedia = document.querySelector(".caroussel");
   const containerMedia = document.querySelector(".containerFlex");
-  carousselMedia.remove(containerMedia);
+  carousselMedia.innerHTML = "";
 }
 
-export { openBoxSelection, closeBoxSelection, triDuSelectionneur /*triTitre*/ };
+export {
+  openBoxSelection,
+  closeBoxSelection,
+  triDuSelectionneur,
+  removeCaroussel /*triTitre*/,
+};
 
 /*const populaire = document.querySelector(".populaire");
 
