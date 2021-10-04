@@ -1,52 +1,69 @@
-import { displayPhotoParTitre } from "./indexPagePhotographe.js";
+import {} from "./function.js";
 
-// Variable attaché à la fleche du menu deroulant "popularité"
-const modalOpen = document.querySelectorAll(".btn-fleche-close");
-
-// Lancement de l'évenement de la modal au click sur la fleche
-modalOpen.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// Variable rataché au block navigation
-const modal = document.querySelector(".modal");
-
-// Variable rataché au block navigation
-const modalClose = document.querySelector(".modal-close");
-
-// Variable rataché a la bordure de 'date' dans l'element navigation
-const border = document.querySelector(".border");
-
-// Lancement de la fonction qui va effectuer l'action sur la modal
-function launchModal() {
-  modal.style.display = "flex";
-  modalClose.style.display = "none";
+function openBoxSelection() {
+  const selectionneurOpen = document.querySelectorAll(".btn-fleche-close");
+  selectionneurOpen.forEach((btn) =>
+    btn.addEventListener("click", launchSelectionneur)
+  );
 }
 
-// Variable attaché à la fleche du menu deroulant "popularité, date, titre"
-const toClose = document.querySelectorAll(".btn-fleche");
+function closeBoxSelection() {
+  const toClose = document.querySelectorAll(".btn-fleche");
+  toClose.forEach((btn) => btn.addEventListener("click", closeSelectionneur));
+}
 
-// Lancement fermeture de l'évenement sur la modal au click par la fleche
-toClose.forEach((btn) => btn.addEventListener("click", closeModal));
+// Lancement de la fonction qui va effectuer l'action sur la modal
+function launchSelectionneur() {
+  const selectionneur = document.querySelector(".modal");
+  const selectionneurClose = document.querySelector(".modal-close");
+  selectionneur.style.display = "flex";
+  selectionneurClose.style.display = "none";
+}
 
 // Fonction closeModal qui va modifier des elements de styles sur le block modal et modal-close
-function closeModal() {
-  modal.style.animationName = "scale-down-ver-down";
-  modalClose.style.display = "block";
-  modalClose.style.zIndex = "1";
+function closeSelectionneur() {
+  const selectionneur = document.querySelector(".modal");
+  const selectionneurClose = document.querySelector(".modal-close");
+  const border = document.querySelector(".border");
+  selectionneur.style.animationName = "scale-down-ver-down";
+  selectionneurClose.style.display = "block";
+  selectionneurClose.style.zIndex = "1";
   // Utilisation d'un timer pour créer de la fluidité sur la disparition de la bordure de l'élement 'date'
   setTimeout(function () {
     border.style.animationDirection = "reverse";
   }, 350);
   // Réinitialisation des parametres d'origine à la fin de l'animation de retour
   setTimeout(function () {
-    modal.style.display = "none";
-    modal.style.animationName = "scale-down-ver-top";
+    selectionneur.style.display = "none";
+    selectionneur.style.animationName = "scale-down-ver-top";
     border.style.animationDirection = "normal";
   }, 820);
 }
 
-export { launchModal, closeModal, triTitre };
+function triDuSelectionneur() {
+  const populaire = document.querySelector(".populaire");
+  populaire.addEventListener("click", triParPopularité);
 
-const populaire = document.querySelector(".populaire");
+  const date = document.querySelector(".date");
+  date.addEventListener("click", fonction);
+
+  const titre = document.querySelector(".titre");
+  titre.addEventListener("click", fonction);
+}
+
+function fonction() {
+  console.log("tri");
+}
+
+function triParPopularité(media) {
+  const carousselMedia = document.querySelector(".caroussel");
+  const containerMedia = document.querySelector(".containerFlex");
+  carousselMedia.remove(containerMedia);
+}
+
+export { openBoxSelection, closeBoxSelection, triDuSelectionneur /*triTitre*/ };
+
+/*const populaire = document.querySelector(".populaire");
 
 const date = document.querySelector(".date");
 
@@ -60,7 +77,7 @@ populaire.addEventListener("click", function triPopulaire() {
 });
 
 date.addEventListener("click", function triDate() {
-  modal.style.display = "block";
+  selectionneur.style.display = "block";
 });
 
 titre.addEventListener("click", triTitre);
@@ -72,7 +89,7 @@ function triTitre(photoTitre) {
     let triPhotoTitre = photoTitre[e].image;
     let triVideoTitre = photoTitre[e].video;
 
-    triTitreTableau.push(triPhotoTitre, triVideoTitre);
+    //triTitreTableau.push(triPhotoTitre, triVideoTitre);
 
     const triElementDifferentUndefined = triTitreTableau.filter(
       (el) => el != undefined
@@ -82,4 +99,4 @@ function triTitre(photoTitre) {
 
     displayPhotoParTitre;
   }
-}
+}*/
