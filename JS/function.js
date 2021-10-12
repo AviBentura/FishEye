@@ -1,3 +1,5 @@
+import { removeCaroussel } from "./modal.js";
+
 function getAllTags(photographers) {
   let tags = [];
   photographers.forEach((photographer) => {
@@ -43,6 +45,7 @@ function addListenersToTags(container, photographers) {
       const filterPhotographers = photographers.filter((photographer) =>
         photographer.tags.includes(filterTags)
       );
+      const containePost = document.querySelector(".content");
       containePost.innerHTML = "";
       filterPhotographers.forEach((photographer) => {
         displayPhotograph(photographer);
@@ -173,6 +176,38 @@ function displayMediaParPopularite(media, folder) {
   }
 }
 
+function triPopularite(media, folder) {
+  let triMediaParPopularité = media.sort((a, b) => b.likes - a.likes);
+  let mediaParPopularité = 0;
+  removeCaroussel();
+  triMediaParPopularité.forEach((media) => {
+    mediaParPopularité = displayMediaParPopularite(media, folder);
+  });
+}
+
+function triTitre(media, folder) {
+  const arrayTitre = media.map((triMedia) => triMedia.title);
+  const triMediaParTitre = arrayTitre.sort();
+  removeCaroussel();
+  for (let i = 0; i < triMediaParTitre.length; i++) {
+    const mediaParTitre = media.find((el) => el.title === triMediaParTitre[i]);
+    displayMediaParPopularite(mediaParTitre, folder);
+  }
+}
+
+function triDate(media, folder) {
+  const triMediaParDate = media.sort(function (a, b) {
+    a = new Date(a.date);
+    b = new Date(b.date);
+    return a > b ? -1 : a < b ? 1 : 0;
+  });
+  removeCaroussel();
+  let mediaParDate = 0;
+  triMediaParDate.forEach((media) => {
+    mediaParDate = displayMediaParPopularite(media, folder);
+  });
+}
+
 export {
   displayPhotograph,
   displayNav,
@@ -185,4 +220,7 @@ export {
   displayPhotoParTitre,
   displayVideo,
   displayMediaParPopularite,
+  triPopularite,
+  triTitre,
+  triDate,
 };

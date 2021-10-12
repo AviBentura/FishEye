@@ -1,14 +1,11 @@
-import {
-  closeBoxSelection,
-  openBoxSelection,
-  removeCaroussel,
-} from "./modal.js";
+import { closeBoxSelection, openBoxSelection } from "./modal.js";
 
 import {
-  displayMediaPhotographer,
   displayBannerPage,
   displayModalInfo,
-  displayMediaParPopularite,
+  triPopularite,
+  triDate,
+  triTitre,
 } from "./function.js";
 
 function getId() {
@@ -39,7 +36,7 @@ fetch("JS/data.json")
       (media) => media.photographerId == getId()
     );
 
-    displayMediaPhotographer(mediaPhotos, nameFolder);
+    triPopularite(mediaPhotos, nameFolder);
 
     let sommeTotalLikes = 0;
     mediaPhotos.forEach((media) => {
@@ -48,31 +45,19 @@ fetch("JS/data.json")
 
     displayModalInfo(mediaName, sommeTotalLikes);
 
-    let triMediaParPopularité = mediaPhotos.sort((a, b) => a.likes - b.likes);
-
-    let triMediaParTitre = new Media(triMediaParPopularité);
-
-    let mediaParPopularité = 0;
-
     const populaire = document.querySelector(".populaire");
     populaire.addEventListener("click", function triParPopularité() {
-      removeCaroussel();
-      triMediaParPopularité.forEach((media) => {
-        mediaParPopularité = displayMediaParPopularite(media, nameFolder);
-      });
+      triPopularite(mediaPhotos, nameFolder);
     });
-
-    //let triMediaParTitre = triMediaParPopularité.reverse();
-
-    console.log(triMediaParTitre);
-    let mediaParTitre = 0;
 
     const titre = document.querySelector(".titre");
     titre.addEventListener("click", function triParTitre() {
-      removeCaroussel();
-      /*triMediaParTitre.forEach((media) => {
-        mediaParTitre = displayMediaParPopularite(media, nameFolder);
-      });*/
+      triTitre(mediaPhotos, nameFolder);
+    });
+
+    const date = document.querySelector(".date");
+    date.addEventListener("click", function triParDate() {
+      triDate(mediaPhotos, nameFolder);
     });
   });
 
