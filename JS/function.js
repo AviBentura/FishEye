@@ -103,14 +103,14 @@ function displayPhoto(media, folder) {
   const carousselMedia = document.querySelector(".caroussel");
   carousselMedia.innerHTML += `<div class="containerFlex">
           <div>
-            <a href="#">
+            <button class="click-button">
               <figure class="boxPhoto"><img
                   src="/FishEye_Photos/Photos/${folder}/${media.image}"
                   class="boxPhoto"
 
                 />
               </figure>
-            </a>
+            </button>
             <div class="likes">
               <figcaption>${media.title}</figcaption>
               <div class="block">
@@ -120,54 +120,32 @@ function displayPhoto(media, folder) {
             </div>
           </div>
         </div>`;
-}
-
-function displayPhotoParTitre(media, folder) {
-  /*carousselMedia.innerHTML += `<div class="containerFlex">
-          <div>
-            <a href="#">
-              <figure class="boxPhoto"><img
-                  src="/FishEye_Photos/Photos/${folder}/${media.image}"
-                  class="boxPhoto"
-
-                />
-              </figure>
-            </a>
-            <div class="likes">
-              <figcaption>${media.title}</figcaption>
-              <div class="block">
-                <span>${media.likes}</span>
-                <i class="fas fa-heart"></i>
-              </div>
-            </div>
-          </div>
-        </div>`;*/
 }
 
 function displayVideo(media, folder) {
   const carousselMedia = document.querySelector(".caroussel");
   carousselMedia.innerHTML += `<div class="containerFlex">
           <div>
-            <a href="#">
+            <button class="click-button">
               <video class="boxPhoto" controls>
                 <source
                   src="./FishEye_Photos/Photos/${folder}/${media.video}" class="boxPhoto"
                   type="video/mp4" class="box-video"
                 />
               </video>
-            </a>
+            </button>
             <div class="likes">
               <figcaption>${media.title}</figcaption>
               <div class="block">
                 <span>${media.likes}</span>
                 <i class="fas fa-heart"></i>
               </div>
-            </div>
+            </div>s
           </div>
         </div>`;
 }
 
-function displayMediaParPopularite(media, folder) {
+function displayMediaBy(media, folder) {
   if (media.image != undefined) {
     displayPhoto(media, folder);
     // Si l'image n'existe pas dans le tableau j'éxécute la fonction displayMedia
@@ -177,34 +155,34 @@ function displayMediaParPopularite(media, folder) {
 }
 
 function triPopularite(media, folder) {
-  let triMediaParPopularité = media.sort((a, b) => b.likes - a.likes);
-  let mediaParPopularité = 0;
+  const triMediaParPopularité = [...media];
+  triMediaParPopularité.sort((a, b) => b.likes - a.likes);
   removeCaroussel();
-  triMediaParPopularité.forEach((media) => {
-    mediaParPopularité = displayMediaParPopularite(media, folder);
+  triMediaParPopularité.forEach((medias) => {
+    displayMediaBy(medias, folder);
   });
 }
 
 function triTitre(media, folder) {
-  const arrayTitre = media.map((triMedia) => triMedia.title);
-  const triMediaParTitre = arrayTitre.sort();
+  const mediaParTitre = [...media];
+  mediaParTitre.sort((a, b) => (a.title > b.title ? 1 : -1));
   removeCaroussel();
-  for (let i = 0; i < triMediaParTitre.length; i++) {
-    const mediaParTitre = media.find((el) => el.title === triMediaParTitre[i]);
-    displayMediaParPopularite(mediaParTitre, folder);
-  }
+  mediaParTitre.forEach((medias) => {
+    displayMediaBy(medias, folder);
+  });
 }
 
 function triDate(media, folder) {
-  const triMediaParDate = media.sort(function (a, b) {
+  const triMediaParDate = [...media];
+  triMediaParDate.sort(function (a, b) {
     a = new Date(a.date);
     b = new Date(b.date);
-    return a > b ? -1 : a < b ? 1 : 0;
+    return a > b ? -1 : 1;
   });
+  console.log(triMediaParDate);
   removeCaroussel();
-  let mediaParDate = 0;
-  triMediaParDate.forEach((media) => {
-    mediaParDate = displayMediaParPopularite(media, folder);
+  triMediaParDate.forEach((medias) => {
+    displayMediaBy(medias, folder);
   });
 }
 
@@ -217,9 +195,8 @@ export {
   displayBannerPage,
   displayModalInfo,
   displayPhoto,
-  displayPhotoParTitre,
   displayVideo,
-  displayMediaParPopularite,
+  displayMediaBy as displayMediaParPopularite,
   triPopularite,
   triTitre,
   triDate,
