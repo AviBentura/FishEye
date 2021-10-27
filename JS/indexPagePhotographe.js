@@ -6,6 +6,7 @@ import {
   triPopularite,
   triDate,
   triTitre,
+  lightBoxElements,
 } from "./function.js";
 
 function getId() {
@@ -45,19 +46,24 @@ fetch("JS/data.json")
 
     displayModalInfo(mediaName, sommeTotalLikes);
 
+    lightBoxElements(mediaPhotos, nameFolder);
+
     const populaire = document.querySelector(".populaire");
-    populaire.addEventListener("click", function triParPopularité() {
+    populaire.addEventListener("click", () => {
       triPopularite(mediaPhotos, nameFolder);
+      lightBoxElements(mediaPhotos, nameFolder);
     });
 
     const titre = document.querySelector(".titre");
-    titre.addEventListener("click", function triParTitre() {
+    titre.addEventListener("click", () => {
       triTitre(mediaPhotos, nameFolder);
+      lightBoxElements(mediaPhotos, nameFolder);
     });
 
     const date = document.querySelector(".date");
-    date.addEventListener("click", function triParDate() {
+    date.addEventListener("click", () => {
       triDate(mediaPhotos, nameFolder);
+      lightBoxElements(mediaPhotos, nameFolder);
     });
   });
 

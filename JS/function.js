@@ -1,5 +1,8 @@
 import { removeCaroussel } from "./modal.js";
 
+import Image from "./image.class.js";
+import Video from "./video.class.js";
+
 function getAllTags(photographers) {
   let tags = [];
   photographers.forEach((photographer) => {
@@ -57,16 +60,16 @@ function addListenersToTags(container, photographers) {
 
 // fonction de la page indexPagePhotographe.js
 
-function displayMediaPhotographer(media, folder) {
-  media.forEach((medias) => {
-    // Si l'image existe j'éxécute la fonction displayPhoto
-    if (medias.image != undefined) {
-      displayPhoto(medias, folder);
-      // Si l'image n'existe pas dans le tableau j'éxécute la fonction displayMedia
-    } else if (medias.image == undefined) {
-      displayVideo(medias, folder);
-    }
+function displayMediaPhotographer(medias, folder) {
+  medias.forEach((elt) => {
+    displayMedia(elt, folder);
   });
+}
+
+function displayMedia(elt, folder) {
+  const carousselMedia = document.querySelector(".caroussel");
+  const media = factory(elt, folder);
+  carousselMedia.innerHTML += media.displayInlist();
 }
 
 // Fonction qui va écrire mon code HTML en récuperant les informations du photographe en question
@@ -99,67 +102,12 @@ function displayModalInfo(pricing, likeTotal) {
   modalInfo.innerHTML += `<div class="block info-icon"><span>${likeTotal} </span><i class="fas fa-heart"></div></i><span class="info-icon">${pricing.price}€ / jour</span></div>`;
 }
 
-function displayPhoto(media, folder) {
-  const carousselMedia = document.querySelector(".caroussel");
-  carousselMedia.innerHTML += `<div class="containerFlex">
-          <div>
-            <button class="click-button">
-              <figure class="boxPhoto"><img
-                  src="/FishEye_Photos/Photos/${folder}/${media.image}"
-                  class="boxPhoto"
-
-                />
-              </figure>
-            </button>
-            <div class="likes">
-              <figcaption>${media.title}</figcaption>
-              <div class="block">
-                <span>${media.likes}</span>
-                <i class="fas fa-heart"></i>
-              </div>
-            </div>
-          </div>
-        </div>`;
-}
-
-function displayVideo(media, folder) {
-  const carousselMedia = document.querySelector(".caroussel");
-  carousselMedia.innerHTML += `<div class="containerFlex">
-          <div>
-            <button class="click-button">
-              <video class="boxPhoto" controls>
-                <source
-                  src="./FishEye_Photos/Photos/${folder}/${media.video}" class="boxPhoto"
-                  type="video/mp4" class="box-video"
-                />
-              </video>
-            </button>
-            <div class="likes">
-              <figcaption>${media.title}</figcaption>
-              <div class="block">
-                <span>${media.likes}</span>
-                <i class="fas fa-heart"></i>
-              </div>
-            </div>s
-          </div>
-        </div>`;
-}
-
-function displayMediaBy(media, folder) {
-  if (media.image != undefined) {
-    displayPhoto(media, folder);
-    // Si l'image n'existe pas dans le tableau j'éxécute la fonction displayMedia
-  } else if (media.image == undefined) {
-    displayVideo(media, folder);
-  }
-}
-
 function triPopularite(media, folder) {
   const triMediaParPopularité = [...media];
   triMediaParPopularité.sort((a, b) => b.likes - a.likes);
   removeCaroussel();
   triMediaParPopularité.forEach((medias) => {
-    displayMediaBy(medias, folder);
+    displayMedia(medias, folder);
   });
 }
 
@@ -168,7 +116,7 @@ function triTitre(media, folder) {
   mediaParTitre.sort((a, b) => (a.title > b.title ? 1 : -1));
   removeCaroussel();
   mediaParTitre.forEach((medias) => {
-    displayMediaBy(medias, folder);
+    displayMedia(medias, folder);
   });
 }
 
@@ -179,10 +127,50 @@ function triDate(media, folder) {
     b = new Date(b.date);
     return a > b ? -1 : 1;
   });
-  console.log(triMediaParDate);
   removeCaroussel();
   triMediaParDate.forEach((medias) => {
-    displayMediaBy(medias, folder);
+    displayMedia(medias, folder);
+  });
+}
+
+function factory(media, folder) {
+  if (media.image) {
+    return new Image(media, folder);
+  } else if (media.video) {
+    return new Video(media, folder);
+  }
+  return undefined;
+}
+
+function lightBoxElements(medias, folder) {
+  const clickMedia = document.querySelectorAll(".click-button");
+  clickMedia.forEach((elt) => {
+    elt.addEventListener("click", (e) => {
+      const findMedia = medias.find((elem) => elem.id == e.target.dataset.id);
+      displayLightboxWith(findMedia, folder, medias);
+    });
+  });
+}
+
+function displayLightboxWith(item, folder, medias) {
+  let index = medias.findIndex((elt) => elt.id === item.id);
+  console.log(index, item);
+  const lightBox = document.querySelector(".lightbox");
+  const mediaLIghtBox = factory(item, folder);
+  lightBox.innerHTML = mediaLIghtBox.displayLightBoxContent();
+  const closeLightbox = document.querySelector(".btn-close");
+  closeLightbox.addEventListener("click", () => {
+    lightBox.innerHTML = "";
+  });
+  const nextRight = document.querySelector(".fleche-right");
+  nextRight.addEventListener("click", () => {
+    index = medias.length - 1 === index ? 0 : index + 1;
+    displayLightboxWith(medias[index], folder, medias);
+  });
+  const nextLeft = document.querySelector(".fleche-left");
+  nextLeft.addEventListener("click", () => {
+    index = index === 0 ? (index = medias.length - 1) : index - 1;
+    displayLightboxWith(medias[index], folder, medias);
   });
 }
 
@@ -194,10 +182,9 @@ export {
   displayMediaPhotographer,
   displayBannerPage,
   displayModalInfo,
-  displayPhoto,
-  displayVideo,
-  displayMediaBy as displayMediaParPopularite,
   triPopularite,
   triTitre,
   triDate,
+  displayLightboxWith,
+  lightBoxElements,
 };
