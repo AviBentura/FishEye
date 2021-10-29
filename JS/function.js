@@ -88,7 +88,9 @@ function displayBannerPage(media) {
             )
             .join(""))}</div>
         </div>
-        <button class="contactButton">Contactez-moi</button>
+        <div class="zoom-in">
+         <button class="contactButton">Contactez-moi</button>
+        </div>
         <figure class="boxContainer">
           <img class="boxImagePhotographers" src="./FishEye_Photos/Photos/Photographers ID Photos/${
             media.portrait
@@ -154,7 +156,6 @@ function lightBoxElements(medias, folder) {
 
 function displayLightboxWith(item, folder, medias) {
   let index = medias.findIndex((elt) => elt.id === item.id);
-  console.log(index, item);
   const lightBox = document.querySelector(".lightbox");
   const mediaLIghtBox = factory(item, folder);
   lightBox.innerHTML = mediaLIghtBox.displayLightBoxContent();
