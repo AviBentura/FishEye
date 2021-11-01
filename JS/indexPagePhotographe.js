@@ -7,6 +7,8 @@ import {
   triDate,
   triTitre,
   lightBoxElements,
+  displayModalContact,
+  regexVerification,
 } from "./function.js";
 
 function getId() {
@@ -65,7 +67,10 @@ fetch("JS/data.json")
       triDate(mediaPhotos, nameFolder);
       lightBoxElements(mediaPhotos, nameFolder);
     });
+
+    displayModalContact(mediaName);
   });
 
 openBoxSelection();
 closeBoxSelection();
+regexVerification();

@@ -18,6 +18,70 @@
       </div>
     </header>
     <main class="displayMain">
+      <div class="bground">
+        <div class="content-box">
+          <button class="btn-closer"></button>
+          <div class="modal-body">
+            <form
+              name="reserve"
+              action="index.html"
+              method="get"
+              onsubmit="return validate();"
+              id="form-registration"
+            >
+              <span class="text-label">Contactez-moi</span>
+              <br />
+              <span class="text-label name"></span>
+              <br />
+              <br />
+              <br />
+              <!-- CHAMPS PRENOM -->
+              <div class="formData">
+                <label>Prénom</label><br />
+                <input
+                  class="text-control"
+                  type="text"
+                  id="first"
+                  name="first"
+                />
+                <br />
+              </div>
+              <!-- CHAMPS NOM -->
+              <div class="formData">
+                <label>Nom</label><br />
+                <input class="text-control" type="text" id="last" name="last" />
+                <br />
+              </div>
+              <!-- CHAMPS E-MAIL -->
+              <div class="formData">
+                <label>E-mail</label><br />
+                <input
+                  class="text-control"
+                  type="email"
+                  id="email"
+                  name="email"
+                />
+                <br />
+              </div>
+              <!-- TEXTAREA -->
+              <div class="formData">
+                <label>Votre message</label><br />
+                <textarea
+                  type="textarea"
+                  class="text-control"
+                  required="required"
+                  id="message"
+                  name="message"
+                  value=""
+                  maxlength="300"
+                ></textarea>
+                <br />
+              </div>
+              <input class="btn-submit" type="submit" value="Envoyer" />
+            </form>
+          </div>
+        </div>
+      </div>
       <div class="containerImport">
         <!--<div class="boxPhotographers">
           <div>

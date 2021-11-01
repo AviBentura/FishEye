@@ -3,6 +3,13 @@ import { removeCaroussel } from "./modal.js";
 import Image from "./image.class.js";
 import Video from "./video.class.js";
 
+import {
+  validateFirst,
+  validateLast,
+  validateEmail,
+  validateMessage,
+} from "./regexpModal.js";
+
 function getAllTags(photographers) {
   let tags = [];
   photographers.forEach((photographer) => {
@@ -175,6 +182,94 @@ function displayLightboxWith(item, folder, medias) {
   });
 }
 
+function displayModalContact(photographer) {
+  const contactButton = document.querySelector(".contactButton");
+  const modal = document.querySelector(".bground");
+  contactButton.addEventListener("click", () => {
+    const contactName = document.querySelector(".name");
+    contactName.innerHTML = `${photographer.name}`;
+    modal.style.display = "block";
+    contactButton.style.display = "none";
+  });
+  const closeButton = document.querySelector(".btn-closer");
+  closeButton.addEventListener("click", () => {
+    modal.style.display = "none";
+    contactButton.style.display = "block";
+  });
+}
+
+function regexVerification() {
+  let form = document.querySelector("#form-registration");
+  form.addEventListener("input", function () {
+    if (!first.value) {
+      first.parentElement.setAttribute("data-error-visible", "true");
+      first.parentElement.setAttribute(
+        "data-error",
+        "Veuillez saisir votre Nom"
+      );
+    }
+    if (!last.value) {
+      last.parentElement.setAttribute("data-error-visible", "true");
+      last.parentElement.setAttribute(
+        "data-error",
+        "Veuillez saisir votre Prénom"
+      );
+    }
+  });
+  form.first.addEventListener("input", function () {
+    validateFirst(this);
+  });
+  form.last.addEventListener("input", function () {
+    validateLast(this);
+  });
+  form.email.addEventListener("input", function () {
+    validateEmail(this);
+  });
+  email.addEventListener("focusout", function () {
+    const filledEmail = email.parentElement;
+    if (!validateEmail) {
+      filledEmail.setAttribute("data-error-visible", "true");
+      filledEmail.setAttribute(
+        "data-error",
+        "Veuillez saisir votre adresse e-mail"
+      );
+    }
+    if (validateEmail(form.email)) {
+      filledEmail.removeAttribute("data-error-visible");
+      filledEmail.removeAttribute("data-error");
+    }
+    setTimeout(function () {
+      filledEmail.removeAttribute("data-error-visible");
+      filledEmail.removeAttribute("data-error");
+    }, 3000);
+  });
+  form.message.addEventListener("input", function () {
+    validateMessage(this);
+  });
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    return validate();
+  });
+  function validate() {
+    let error;
+    let inputs = document.getElementsByTagName("input");
+    for (let i = 0; i < inputs.length; i++) {
+      if (!inputs[i].value) {
+        error = "Veuillez renseigner tous les champs";
+        break;
+      }
+    }
+    if (error) {
+      alert(error);
+      return false;
+    } else {
+      form.innerHTML = `<br /><label>Votre message à bien été envoyé</label>`;
+      const contactButton = document.querySelector(".contactButton");
+      contactButton.remove();
+    }
+  }
+}
+
 export {
   displayPhotograph,
   displayNav,
@@ -188,4 +283,6 @@ export {
   triDate,
   displayLightboxWith,
   lightBoxElements,
+  displayModalContact,
+  regexVerification,
 };

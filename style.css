@@ -9,6 +9,7 @@
 :root {
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
+  --modal-duration: 0.8s;
 }
 * {
   box-sizing: border-box;
@@ -571,6 +572,148 @@ span.info-icon {
 }
 .fleche-right:before {
   top: 20px;
+}
+/* box modal */
+
+.bground {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(196, 196, 196, 0.4);
+}
+.content-box {
+  margin: 5% auto;
+  width: 100%;
+  max-width: 669px;
+  animation-name: modalopen;
+  animation-duration: var(--modal-duration);
+  background: rgba(219, 136, 118, 1);
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  color: black;
+  padding-top: 10px;
+  box-shadow: -5px 5px 13px 0px rgb(0 0 0 / 35%);
+}
+@keyframes modalopen {
+  0% {
+    opacity: 0;
+    transform: translateY(-150px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.btn-closer {
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 35px;
+  top: 35px;
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  cursor: pointer;
+  transform: scale(1.2);
+}
+.btn-closer:before {
+  transform: rotate(45deg);
+}
+.btn-closer:after {
+  transform: rotate(-45deg);
+}
+.btn-closer:before,
+.btn-closer:after {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 3px;
+  background-color: #fff;
+}
+.modal-body {
+  padding: 10px 5%;
+  margin: 0 auto;
+  padding-bottom: 38px;
+}
+.formData[data-error]::after {
+  content: attr(data-error);
+  font-size: 1em;
+  font-family: var(--font-default);
+  color: #681a22;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 7px;
+  text-align: right;
+  line-height: 0.3;
+  opacity: 0;
+  transition: 0.3s;
+}
+.formData[data-error-visible="true"]::after {
+  opacity: 1;
+}
+.formData[data-error-visible="false"]::after {
+  opacity: 1;
+  color: rgb(4, 134, 4);
+}
+.formData[data-error-visible="true"] .text-control {
+  border: 2px solid #681a22;
+}
+.formData[data-error-visible="false"] .text-control {
+  border: 2px solid rgb(4, 134, 4);
+}
+.text-control {
+  margin: 0;
+  padding: 8px;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 20px;
+  height: 48px;
+  border: none;
+}
+input {
+  padding: 8px;
+  border: 0.8px solid #ccc;
+  outline: none;
+}
+textarea:focus {
+  outline: none !important;
+}
+.formData textarea {
+  height: 170px;
+}
+.text-label {
+  font-family: var(--font-default);
+  font-weight: 400;
+  font-size: 3.2rem;
+  color: black;
+  margin-top: 0;
+}
+label {
+  font-family: var(--font-default);
+  font-size: 28px;
+  font-weight: normal;
+  display: inline-block;
+  margin-bottom: 11px;
+  padding-top: 2px;
+}
+.btn-submit,
+.btn-signup {
+  background: rgba(144, 28, 28, 1);
+  display: block;
+  margin-top: 26px;
+  border-radius: 7px;
+  font-size: 1rem;
+  padding: 20px 55px;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
 }
 
 @media screen and (max-width: 626px) {
